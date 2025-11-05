@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simulation TVA & Marge</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <h1>Simulation de prix et de marge</h1>
+      <section class="card">
+        <h2>Paramètres</h2>
+        <form id="simulation-form" novalidate>
+          <fieldset>
+            <legend>Scénario</legend>
+            <label>
+              <input type="radio" name="scenario" value="purchaseAndSale" checked />
+              Prix d'achat + prix de vente
+            </label>
+            <label>
+              <input type="radio" name="scenario" value="purchaseAndTargetMargin" />
+              Prix d'achat + marge cible
+            </label>
+          </fieldset>
+
+          <div class="grid">
+            <label>
+              Prix d'achat HT (€)
+              <input type="number" id="purchasePriceHT" min="0" step="0.01" required />
+            </label>
+            <label data-scenario="purchaseAndSale">
+              Prix de vente HT (€)
+              <input type="number" id="salePriceHT" min="0" step="0.01" required />
+            </label>
+            <label data-scenario="purchaseAndTargetMargin" class="hidden">
+              Marge cible (% du prix de vente)
+              <input type="number" id="targetMarginRate" min="0" max="99.99" step="0.01" />
+            </label>
+            <label>
+              TVA (%)
+              <input type="number" id="vatRate" min="0" step="0.01" value="20" />
+            </label>
+            <label>
+              Impôt sur les sociétés (%)
+              <input type="number" id="corporateTaxRate" min="0" step="0.01" value="25" />
+            </label>
+            <label>
+              Autres contributions (% du bénéfice)
+              <input type="number" id="otherContributionsRate" min="0" step="0.01" value="0" />
+            </label>
+          </div>
+          <p id="form-error" class="error" aria-live="polite"></p>
+          <button type="submit">Calculer</button>
+        </form>
+      </section>
+
+      <section class="card" aria-live="polite">
+        <h2>Résultats</h2>
+        <table id="results-table">
+          <thead>
+            <tr>
+              <th>Indicateur</th>
+              <th>Valeur</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+      <section class="card">
+        <h2>Hypothèses fiscales</h2>
+        <p>
+          Les calculs sont réalisés sur des montants hors taxes. La TVA et l'impôt sur les
+          sociétés sont appliqués selon les taux renseignés. Les autres contributions sont
+          exprimées en pourcentage du bénéfice imposable (marge brute positive). Aucun
+          amortissement ou charge supplémentaire n'est pris en compte.
+        </p>
+      </section>
+    </main>
+
+    <script type="module" src="app.js"></script>
+  </body>
+</html>

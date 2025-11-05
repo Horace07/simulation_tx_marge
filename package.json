@@ -1,0 +1,12 @@
+{
+  "name": "simulation-tx-marge",
+  "version": "1.0.0",
+  "description": "Simulation de marge avec prise en compte de la TVA et de l'impôt sur les sociétés.",
+  "type": "module",
+  "scripts": {
+    "test:scenarios": "node scripts/run_scenarios.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT"
+}
